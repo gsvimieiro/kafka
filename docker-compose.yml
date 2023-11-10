@@ -113,6 +113,19 @@ services:
       - schema-registry
     networks:
       - kafka_network
+  postgres:
+    image: postgres:latest
+    container_name: postgres_kafka
+    environment:
+      POSTGRES_DB: kafka_consumer
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - /path/to/store/data:/var/lib/postgresql/data 
+    networks:
+      - kafka_network
 
   schema-registry:
     image: confluentinc/cp-schema-registry:6.2.0
